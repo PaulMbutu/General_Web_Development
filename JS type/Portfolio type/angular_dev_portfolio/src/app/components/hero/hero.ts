@@ -1,9 +1,17 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-hero',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './hero.html',
   styleUrl: './hero.scss',
 })
-export class Hero {}
+export class HeroComponent{
+  scrollToProjects() {
+    document.getElementById('projects')?.scrollIntoView(
+      { behavior: 'smooth',block: 'start' }
+    );
+  }
+}
