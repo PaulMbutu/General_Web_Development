@@ -1,9 +1,22 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { ProjectService, Project } from '../../shared/services/project';
 
 @Component({
   selector: 'app-projects',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './projects.html',
   styleUrl: './projects.scss',
 })
-export class Projects {}
+export class ProjectsComponent implements OnInit {
+  projects: Project[] = [];
+
+  constructor(private projectService: ProjectService) {}
+
+  ngOnInit(): void {
+    this.projectService.getProjects().subscribe(data => {
+      this.projects = data;
+    });
+  }
+}

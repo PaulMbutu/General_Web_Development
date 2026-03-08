@@ -1,0 +1,29 @@
+footer {
+    padding: 1.5rem 1rem 2rem;
+    background: radial-gradient(circle at top, #020617, #000000);
+    border-top: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.footer {
+    display: felx;
+    flex-direction: column;
+    gap: 0.25rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.small {
+    font-size: 0.8rem;
+}
+
+@media (min-width: 768px) {
+    footer {
+        padding-inline: 2rem;
+    }
+
+    .footer {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+}

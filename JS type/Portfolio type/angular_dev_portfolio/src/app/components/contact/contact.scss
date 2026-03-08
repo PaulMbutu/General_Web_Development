@@ -1,0 +1,82 @@
+.contact-grid {
+    display: grid;
+    gap: 1.75rem;
+}
+
+form.card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+label {
+    font-size: 0.9rem;
+}
+
+input,
+textarea {
+    padding: 0.55rem 0.7rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(148, 163, 184, 0.4);
+    background: rgba(15, 23, 42, 0.7);
+    color: var(--text-main);
+    outline: none;
+    font-size: 0.9rem;
+}
+
+input:focus,
+textarea:focus {
+    border-color: var(--accent);
+}
+
+.error {
+    font-size: 0.8rem;
+    color: var(--error);
+}
+
+.success {
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--accent-2);
+}
+
+.side h3 {
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 0.5rem;
+}
+
+.side p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+}
+
+.socials {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.soccials a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    color: var(--text-muted);
+}
+
+.socials a:hover {
+    color: var(--text-main);
+}
+
+@media (min-width: 768px) {
+    .cotact-grid {
+        grid-template-columns: 3fr 2fr;
+    }
+}

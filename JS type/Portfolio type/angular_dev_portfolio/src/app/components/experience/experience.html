@@ -1,1 +1,15 @@
-<p>experience works!</p>
+<div class="container" data-aos="fade-up">
+    <h2 class="section-title"> Experience & Education</h2>
+
+    <div class="timeline">
+        <div class="timeline-item" *ngFor="let item of experienceItems">
+            <div class="dot"></div>
+            <div class="content card">
+                <span class="period">{{ item.period }}</span>
+                <h3>{{ item.title }}</h3>
+                <h4>{{ item.subtitle }}</h4>
+                <p>{{ item.description }}</p>
+            </div>
+        </div>
+    </div>
+</div>

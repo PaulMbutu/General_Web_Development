@@ -1,0 +1,73 @@
+.projects-grid {
+    @extend .grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.project-card {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s;
+}
+
+.project-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top left, rgba(99, 102, 241, 0.3), transparent 55%) ;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.9);
+    border-color: var(--accent);
+}
+
+.project-card:hover::before {
+    opacity:1;
+}
+
+.project-card h3 {
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 0.5rem;
+}
+
+.description {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+}
+
+.tech-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 0.75rem;
+}
+
+.tech-list li {
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    background: rgba(15, 23, 42, 0.9);
+    border: 1px solid rgba(148, 163, 184, 0.4);
+    font-size: 0.75rem;
+}
+
+.links {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.9rem;
+}
+
+.links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: var(--accent);
+}
+
+.links a:hover {
+    filter: brightness(1.2);
+}

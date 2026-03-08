@@ -1,1 +1,12 @@
-<p>skills works!</p>
+<div class="container" data-aos="fade-up">
+    <h2 class="section-title">Skills</h2>
+    <div class="skills-grid">
+        <div class="skill-card card" *ngFor="let skill of skills">
+            <div class="icon-wrapper">
+                <i [class]="skill.iconClass"></i>
+            </div>
+            <h3>{{ skill.name }}</h3>
+            <p>{{ skill.level }}</p>
+        </div>
+    </div>
+</div>

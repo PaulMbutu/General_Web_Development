@@ -1,1 +1,23 @@
-<p>projects works!</p>
+<div class="container" data-aos="fade-up">
+    <h2 class="section-title">Projects</h2>
+
+    <div class="projects-grid">
+        <article class="project-card card" *ngFor="let project of projects">
+            <h3>{{ project.title }}</h3>
+            <p class="description">{{ project.description }}</p>
+
+            <ul class="tech-list">
+                <li *ngFor="let tech of project.technologies">{{ tech }}</li>
+            </ul>
+
+            <div class="links">
+                <a ngIf="project.liveUrl" [href]="project.liveUrl" target="_blank">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo
+                </a>
+                <a *ngIf="project.codeUrl" [href]="project.codeUrl" target="_blank">
+                    <i class="fa-brands fa-github"></i> View Code
+                </a>
+            </div>
+        </article>
+    </div>
+</div>
