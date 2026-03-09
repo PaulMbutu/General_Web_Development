@@ -16,10 +16,17 @@ interface Skill {
 })
 export class SkillsComponent {
   skills: Skill[] = [
-    { name: 'JavaScript', iconClass: 'fa-brands fa-angular',  level: 'Advanced' },
-    { name: 'TypeScript', iconClass: 'fa-brands fa-typescript',  level: 'Advanced' },
-    { name: 'Angular',    iconClass: 'fa-brands fa-angular',   level: 'Advanced' },
-    { name: 'React',      iconClass: 'fa-brands fa-react',    level: 'Intermediate' },
-    { name: 'Git',        iconClass: 'fa-brands fa-git',         level: 'Intermediate' }
+    { name: 'Git',        iconClass: 'fa-brands fa-git',        level: 'Intermediate' },
+    { name: 'JavaScript', iconClass: 'fa-brands fa-js',         level: 'Advanced' },
+    { name: 'TypeScript', iconClass: 'fa-brands fa-square-js',  level: 'Advanced' },
+    { name: 'Python',     iconClass: 'fa-brands fa-python',     level: 'Advanced' },
+    { name: 'C++',        iconClass: 'fa-solid fa-code',        level: 'Advanced' },
+    { name: 'MQL5',       iconClass: 'fa-solid fa-chart-line',  level: 'Advanced' },
+    { name: 'React',      iconClass: 'fa-brands fa-react',      level: 'Intermediate' },
+    { name: 'Vue',        iconClass: 'fa-brands fa-vuejs',      level: 'Intermediate' },
+    { name: 'Angular',    iconClass: 'fa-brands fa-angular',    level: 'Advanced' },
+    { name: 'Streamlit',  iconClass: 'devicon-streamlit-plain colored',         level: 'Intermediate' },
+    { name: 'Django',     iconClass: 'devicon-django-plain colored',            level: 'Intermediate' },
+    { name: 'NextJs',     iconClass: 'devicon-nextjs-plain-wordmark colored',   level: 'Intermediate' }
   ];
 }
