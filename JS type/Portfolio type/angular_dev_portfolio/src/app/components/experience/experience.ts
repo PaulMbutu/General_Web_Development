@@ -18,16 +18,28 @@ interface ExperienceItem {
 export class ExperienceComponent {
   experience: ExperienceItem[] = [
     {
-      title: 'Software Engineer',
-      subtitle: 'Freelance',
-      period: 'Jan 2020 - Present',
-      description: 'Working on developing and maintaining web applications using Angular among other technologies.',
+      title: 'Title',
+      subtitle: 'Company',
+      period: 'Start - Finish',
+      description: 'Experience description.',
     },
     {
-      title: 'Transccriptionist',
-      subtitle: 'REV',
-      period: 'Jun 2021 - Dec 2022',
-      description: 'Focused on transcription and data entry tasks.'
+      title: 'Title',
+      subtitle: 'Company',
+      period: 'Start - Finish',
+      description: 'Experience description.',
+    },
+    {
+      title: 'Title',
+      subtitle: 'Company',
+      period: 'Start - Finish',
+      description: 'Experience description.',
+    },
+    {
+      title: 'Title',
+      subtitle: 'Company',
+      period: 'Start - Finish',
+      description: 'Experience description.',
     }
   ]
 }

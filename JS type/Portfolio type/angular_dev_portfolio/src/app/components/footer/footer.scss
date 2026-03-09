@@ -2,10 +2,11 @@ footer {
     padding: 1.5rem 1rem 2rem;
     background: radial-gradient(circle at top, #020617, #000000);
     border: 1px solid rgba(148, 163, 184, 0.2);
+    
 }
 
 .footer {
-    display: felx;
+    display: flex;
     flex-direction: column;
     gap: 0.25rem;
     font-size: 0.85rem;

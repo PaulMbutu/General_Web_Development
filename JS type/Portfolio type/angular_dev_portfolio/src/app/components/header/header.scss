@@ -52,7 +52,7 @@ header.scrolled {
 /* Hover effect for the whole logo */
 .logo:hover .logo-pill {
     transform: scale(1.2);
-    background: rgba(99, 102, 241, 0.25);
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
 }
 
 .logo-text {
