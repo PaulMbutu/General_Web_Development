@@ -3,7 +3,7 @@ import Button from '../uiComponents/Button'
 
 const CartSummary = () => {
   return (
-    <div className="w-[400px] max-lg:w-full border border-gray-200 rounded-lg shadow-md bg-white px-8 py-6">
+    <div className="w-100 max-lg:w-full border border-gray-200 rounded-lg shadow-md bg-white px-8 py-6">
     <h2 className="font-semibold text-2xl text-gray-800 mb-6">Order Summary</h2>
 
     <div className="w-full flex items-center justify-between py-2">

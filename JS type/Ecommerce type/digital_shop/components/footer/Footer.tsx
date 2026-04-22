@@ -8,7 +8,7 @@ const Footer = () => {
       <div className="flex justify-between items-center main-max-width mx-auto padding-x flex-wrap gap-6 max-md:justify-center">
         {/* Logo & Description */}
         <div className="flex flex-col gap-6 w-125">
-          <h1 className="text-3xl font-bold text-white">Shoppit</h1>
+          <h1 className="text-3xl font-bold text-white">DigitalShop</h1>
           <p className="text-[15px] text-gray-400 leading-[1.6]">
             DigitalShop is a sleek and modern e-commerce website where you can
             browse, shop, and securely checkout with ease. Whether you&apos;re

@@ -17,7 +17,7 @@ const ProductCard = () => {
     </div>
 
     {/* Product Name */}
-    <p className="text-center text-lg font-semibold text-gray-800">Apple Gaming Pad</p>
+    <p className="text-center text-lg font-semibold text-gray-800">Gaming Pad</p>
 
     {/* Product Price */}
     <p className="text-[18px] text-center font-bold text-black">$300.00</p>
