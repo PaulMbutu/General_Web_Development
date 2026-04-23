@@ -1,7 +1,8 @@
 import React from 'react'
 import Image from "next/image"
+import { signIn } from '@/auth'
 
-const SignupPage = () => {
+const SignInPage = () => {
   return (
     <div className="bg-gray-50 flex items-center justify-center min-h-screen px-4">
     <div className="bg-white shadow-xl rounded-2xl p-6 sm:p-10 max-w-sm w-full flex flex-col gap-6">
@@ -9,7 +10,10 @@ const SignupPage = () => {
         Welcome!
       </h2>
   
-      <form>
+      <form action={ async () => {
+        "use server"
+        await signIn("google", {redirectTo: "/"})
+      }}>
         <button className="w-full flex items-center cursor-pointer justify-center border
                              border-gray-300 hover:border-gray-500 text-gray-700 font-medium py-3 
                              rounded-lg shadow-sm transition-all duration-300 bg-white hover:bg-gray-100">
@@ -28,4 +32,4 @@ const SignupPage = () => {
   )
 }
 
-export default SignupPage
+export default SignInPage
