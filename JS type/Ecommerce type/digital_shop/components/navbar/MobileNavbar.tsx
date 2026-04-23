@@ -8,7 +8,14 @@ import {
 import { GiHamburgerMenu } from "react-icons/gi";
 import NavItems from "./NavItems";
 
-const MobileNavbar = () => {
+interface Props{
+    loggedInUser:{
+    name: string;
+    email:string;
+    image:string;
+  }
+}
+const MobileNavbar = ({loggedInUser}:Props) => {
   return (
     <Sheet>
       <SheetTrigger>
@@ -21,7 +28,7 @@ const MobileNavbar = () => {
           </SheetTitle>
         </SheetHeader>
 
-        <NavItems mobile />
+        <NavItems mobile loggedInUser={loggedInUser}/>
 
         {/* <SheetClose className="overflow-y-auto">
           <NavItems mobile />

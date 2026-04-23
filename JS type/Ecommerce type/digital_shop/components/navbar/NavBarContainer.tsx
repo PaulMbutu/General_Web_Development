@@ -6,7 +6,7 @@ const NavBarContainer = async () => {
   
     const session = await auth()
     const user = session?.user
-    console.log(session)
+    /*console.log(session)*/
 
     return (
         <NavBar loggedInUser={user}/>
