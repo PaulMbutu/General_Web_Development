@@ -1,5 +1,7 @@
 import axios from "axios";
 
+export const BASE_URL ="http://127.0.0.1:8008"
+
 const api = axios.create({
     baseURL:"http://127.0.0.1:8008"
 })
@@ -42,3 +44,46 @@ export async function createNewUser(
                                             throw new Error("an unknown error occured");
                                         }
                                     }
+                                
+export async function getCategories() {
+    try{
+        const response = await api.get("category_list")
+        return response.data
+    }
+
+    catch(err:unknown)
+    {
+        if(err instanceof Error){
+            throw new Error(err.message)
+        }
+        throw new Error("an unknown error occured");
+    }
+}
+
+export async function getCategory(slug: string){
+    try{
+        const response = await api.get(`categories/${slug}`)
+        return response.data
+    }
+    catch(err:unknown)
+    {
+        if(err instanceof Error){
+            throw new Error(err.message)
+        }
+        throw new Error("an unknown error occured");
+    }
+}
+
+export async function getProducts(){
+    try{
+        const response = await api.get("product_list")
+        return response.data
+    }
+    catch(err:unknown)
+    {
+        if(err instanceof Error){
+            throw new Error(err.message)
+        }
+        throw new Error("an unknown error occured");
+    }
+}

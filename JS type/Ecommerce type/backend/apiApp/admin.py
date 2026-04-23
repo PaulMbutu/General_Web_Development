@@ -18,7 +18,7 @@ admin.site.register(Product, ProductAdmin)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ["name", "slug"]
 
-admin.site.register(Category, CategoryAdmin)
+admin.site.register(Category, CategoryAdmin) #The category model creates a spelling error of "Categorys" instead of Categories in the admin panel
 
 
 class ReviewAdmin(admin.ModelAdmin):
