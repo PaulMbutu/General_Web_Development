@@ -2,34 +2,33 @@ import React from 'react'
 import Image from "next/image"
 import { Product } from '@/lib/type'
 import { BASE_URL } from '@/lib/api'
+import Link from 'next/link'
 
 const ProductCard = ({product}:{product:Product}) => {
   
   return (
-    
-    <div className="w-65 rounded-lg shadow-md bg-white flex flex-col items-center gap-4 px-5 py-6 transition-all duration-300 hover:shadow-xl hover:scale-105 cursor-pointer">
-        
-      
-    <div className="w-50 h-50 rounded-md overflow-hidden">
-    <Image
-          src={`${BASE_URL}${product.image}`}
-          className="object-cover w-full h-full"
-          width={200}
-          height={200}
-          alt="thumbnail"
-          unoptimized={true}
-        />
-      
-    </div>
+    <Link href={`/products/${product.slug}`}>
+      <div className="w-65 rounded-lg shadow-md bg-white flex flex-col items-center gap-4 px-5 py-6 transition-all duration-300 hover:shadow-xl hover:scale-105 cursor-pointer">
+        <div className="w-50 h-50 rounded-md overflow-hidden">
+          <Image
+                src={`${BASE_URL}${product.image}`}
+                className="object-cover w-full h-full"
+                width={200}
+                height={200}
+                alt="thumbnail"
+                unoptimized={true}
+              />
+        </div>
 
-    {/* Product Name */}
-    <p className="text-center text-lg font-semibold text-gray-800">{product.name}</p>
+        {/* Product Name */}
+        <p className="text-center text-lg font-semibold text-gray-800">{product.name}</p>
 
-    {/* Product Price */}
-    <p className="text-[18px] text-center font-bold text-black">${product.price}</p>
+        {/* Product Price */}
+        <p className="text-[18px] text-center font-bold text-black">${product.price}</p>
 
-   
-  </div>
+      </div>
+    </Link>
+
   )
 }
 

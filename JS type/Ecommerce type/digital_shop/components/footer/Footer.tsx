@@ -13,7 +13,7 @@ const Footer = () => {
             DigitalShop is a sleek and modern e-commerce website where you can
             browse, shop, and securely checkout with ease. Whether you&apos;re
             looking for the latest trends or everyday essentials, Shoppit makes
-            online shopping seamless and enjoyable. 🚀🛍️
+            online shopping seamless and enjoyable.
           </p>
         </div>
 

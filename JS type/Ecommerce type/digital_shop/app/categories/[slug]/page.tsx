@@ -4,6 +4,11 @@ import { getCategories, getCategory } from '@/lib/api'
 import { Category, Product } from '@/lib/type'
 import React from 'react'
 
+export async function generateStaticParams(){
+  const categories = await getCategories()
+  return categories.map((cat: Category) => ({slug: cat.slug}))
+}
+
 const CategoryPage = async ({params} : {params: Promise<{slug: string}>}) => {
 
   const { slug } = await params
