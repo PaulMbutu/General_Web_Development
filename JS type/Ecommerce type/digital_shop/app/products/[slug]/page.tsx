@@ -1,3 +1,4 @@
+import { auth } from "@/auth";
 import ProductSection from "@/components/home/ProductSection";
 import ProductInfo from "@/components/productDetail/ProductInfo";
 import RatingProgressBar from "@/components/productDetail/RatingProgressBar";
@@ -8,6 +9,7 @@ import { getProduct } from "@/lib/api";
 import { ProductDetail } from "@/lib/type";
 import { cn } from "@/lib/utils";
 import { Star } from "lucide-react";
+import Link from "next/link";
 import React from "react";
 
 const ProductPage = async ({params}:{params: Promise<{slug: string}>}) => {
@@ -27,7 +29,8 @@ const ProductPage = async ({params}:{params: Promise<{slug: string}>}) => {
 
   const reviews = product.reviews
   const similar_products = product.similar_products
-
+  const session = await auth()
+  const loggedInUser = session?.user
   console.log("Current product",product)
 
   return (
@@ -68,9 +71,16 @@ const ProductPage = async ({params}:{params: Promise<{slug: string}>}) => {
         {/* Review modal form */}
 
         <div className="flex justify-center items-center w-full mb-5">
+
+        { loggedInUser ?
           <Modal>
             <ReviewForm />
           </Modal>
+          : <Link href="/signin" className="default-btn max-sm:text-[12px] max-sm:px-4 my-6">
+              Sign In to add a review
+          </Link>
+        }
+
         </div>
 
         {/* Review modal form ends */}
