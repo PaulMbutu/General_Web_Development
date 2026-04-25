@@ -3,13 +3,41 @@ import { cn, timeAgo } from "@/lib/utils";
 import { PenIcon, Star, TrashIcon } from "lucide-react";
 import { User } from "next-auth";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import Modal from "../uiComponents/Modal";
 import ReviewForm from "./ReviewForm";
+import DeleteModal from "../uiComponents/DeleteModal";
+import { deleteReviewAction } from "@/lib/actions";
+import { toast } from "react-toastify";
 
 const ReviewCard = ({review,loggedInUser, product}: {review:Review, loggedInUser: User | undefined | null, product: ProductDetail}) => {
   const starArray = [1, 2, 3, 4, 5];
   const loggedInUserEmail = loggedInUser?.email
+  const [isDeleting, setIsDeleting] = useState(false)
+
+  async function handleDeleteReview(){
+    if (isDeleting) return // Prevent multiple calls
+    
+    setIsDeleting(true)
+    const formData = new FormData()
+    formData.set("review_id", String(review.id))
+    formData.set("slug", product.slug)
+
+    try{
+      await deleteReviewAction(formData)
+      toast.success("Review deleted successfully!")
+    }
+    catch(err:unknown){
+        console.error("Delete error:", err)
+        if(err instanceof Error){
+            toast.error(err.message)
+        } else {
+            toast.error("An unknown error occurred")
+        }
+    } finally {
+      setIsDeleting(false)
+    }
+  }
 
   return (
     <div className="w-full bg-white shadow-lg px-6 py-6 rounded-lg flex flex-col gap-4 mb-6">
@@ -19,19 +47,12 @@ const ReviewCard = ({review,loggedInUser, product}: {review:Review, loggedInUser
           <span className="flex gap-4">
             <>
               {/* Trash button to delete review */}
-              <button className="bg-gray-200 p-2 rounded-md cursor-pointer transition-all hover:bg-gray-300">
-                <TrashIcon className="size-5 text-gray-600" />
-              </button>
+              <DeleteModal handleDeleteReview={handleDeleteReview} isDeleting={isDeleting}/>
 
               {/* Pen button to edit review */}
               <Modal updateReviewModal>
                 <ReviewForm review = {review} product={product} loggedInUserEmail={loggedInUserEmail} updateReviewForm={true}/>
               </Modal>
-              {/*
-              <button className="bg-gray-200 p-2 rounded-md cursor-pointer transition-all hover:bg-gray-300">
-                <PenIcon className="size-5 text-gray-600" />
-              </button>
-              */}
             </>
           </span>
         }
@@ -45,7 +66,6 @@ const ReviewCard = ({review,loggedInUser, product}: {review:Review, loggedInUser
       </div>
 
       {/* Reviewer's profile and review content */}
-
       <div className="flex gap-4 items-center">
         {/* Profile picture */}
         <div className="w-12.5 h-12.5 rounded-full relative overflow-hidden border-2 border-gray-200">

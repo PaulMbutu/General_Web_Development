@@ -114,10 +114,14 @@ def update_review(request, pk):
 
 @api_view(['DELETE'])
 def delete_review(request, pk):
-    review = Review.objects.get(id=pk) 
-    review.delete()
-
-    return Response("Review deleted successfully!", status=204)
+    try:
+        review = Review.objects.get(id=pk)
+        review.delete()
+        return Response({'message': 'Review deleted successfully'}, status=status.HTTP_200_OK)
+    except Review.DoesNotExist:
+        return Response({'error': 'Review not found'}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 @api_view(['DELETE'])
 def delete_cartitem(request, pk):

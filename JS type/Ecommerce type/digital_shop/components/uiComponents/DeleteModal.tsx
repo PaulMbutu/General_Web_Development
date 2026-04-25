@@ -10,12 +10,18 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
+import { TrashIcon } from 'lucide-react'
 
-const DeleteModal = () => {
+const DeleteModal = ({handleDeleteReview, isDeleting}:{handleDeleteReview:()=> Promise<void>, isDeleting?: boolean}) => {
   return (
         <AlertDialog>
-        <AlertDialogTrigger>
-            Open
+        <AlertDialogTrigger asChild>
+              <button 
+                className="bg-gray-200 p-2 rounded-md cursor-pointer transition-all hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                disabled={isDeleting}
+              >
+                <TrashIcon className="size-5 text-gray-600" />
+              </button>
         </AlertDialogTrigger>
         <AlertDialogContent>
             <AlertDialogHeader>
@@ -26,8 +32,17 @@ const DeleteModal = () => {
             </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction>Continue</AlertDialogAction>
+            <AlertDialogCancel className='cursor-pointer'>Cancel</AlertDialogCancel>
+            <AlertDialogAction 
+              className='cursor-pointer' 
+              onClick={(e) => {
+                e.preventDefault()
+                handleDeleteReview()
+              }}
+              disabled={isDeleting}
+            >
+              {isDeleting ? "Deleting..." : "Continue"}
+            </AlertDialogAction>
             </AlertDialogFooter>
         </AlertDialogContent>
         </AlertDialog>
