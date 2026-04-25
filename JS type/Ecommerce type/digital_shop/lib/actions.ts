@@ -7,6 +7,11 @@ import { revalidatePath } from "next/cache"
 export async function signOutUser() {
     await signOut({redirectTo: "/"})
 }
+export async function updateReviewAction(formData: FormData){
+
+    const rating = Number(formData.get)
+
+}
 
 export async function createReviewAction(formData: FormData){
     const product_id = Number(formData.get("product_id"))

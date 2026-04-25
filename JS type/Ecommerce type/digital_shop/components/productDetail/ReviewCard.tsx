@@ -25,7 +25,7 @@ const ReviewCard = ({review,loggedInUser, product}: {review:Review, loggedInUser
 
               {/* Pen button to edit review */}
               <Modal updateReviewModal>
-                <ReviewForm product={product} loggedInUserEmail={loggedInUserEmail}/>
+                <ReviewForm review = {review} product={product} loggedInUserEmail={loggedInUserEmail} updateReviewForm={true}/>
               </Modal>
               {/*
               <button className="bg-gray-200 p-2 rounded-md cursor-pointer transition-all hover:bg-gray-300">

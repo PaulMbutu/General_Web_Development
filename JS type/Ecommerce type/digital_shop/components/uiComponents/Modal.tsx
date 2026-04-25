@@ -26,7 +26,8 @@ const Modal = ({ children, userHasReview, updateReviewModal }: Props) => {
           updateReviewModal ?(
           <button className="bg-gray-200 p-2 rounded-md cursor-pointer transition-all hover:bg-gray-300">
             <PenIcon className="size-5 text-gray-600" />
-          </button>)
+          </button>
+          )
           :
           (<Button className="default-btn max-sm:text-[12px] max-sm:px-4 my-6">
             Click to add a review

@@ -2,10 +2,10 @@
 
 import { Star } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../uiComponents/Button";
 import { cn } from "@/lib/utils";
-import { ProductDetail } from "@/lib/type";
+import { ProductDetail, Review } from "@/lib/type";
 import { createReviewAction } from "@/lib/actions";
 import { toast } from "react-toastify";
 
@@ -16,13 +16,18 @@ interface Props {
 
 const ReviewForm = ({
                         product,
-                        loggedInUserEmail
+                        loggedInUserEmail,
+                        review,
+                        updateReviewForm
                       }:{
                         product:ProductDetail, 
-                        loggedInUserEmail: String | null | undefined
+                        loggedInUserEmail: string | null | undefined,
+                        review?: Review;
+                        updateReviewForm?: boolean
                       }) => {
 
   const {id, slug} = product
+  const {rating, review: reviewMessage} = review || {rating: 0, review: "no review"}
   const [customerReview, setCustomerReview] = useState("")
   const [reviewBtnLoader, setReviewButtonLoader] = useState(false)
 
@@ -56,6 +61,17 @@ const ReviewForm = ({
     { rating: 4, review: "Very Good" },
     { rating: 5, review: "Excellent" },
   ];
+
+  useEffect(() =>{
+    if(updateReviewForm)
+    {
+      setClickedRating(rating)
+      setCustomerReview(reviewMessage)
+    }
+    const ratingTag = ratings.find((r)=> r.rating===rating)
+    setClickedReview(ratingTag ? ratingTag.review : "")
+    
+  },[rating, reviewMessage, updateReviewForm])
 
   async function handleCreateReview(e: React.FormEvent){
     e.preventDefault()
@@ -139,7 +155,14 @@ const ReviewForm = ({
         <Button
           disabled={clickedRating < 1 || (customerReview && customerReview.trim()).length==0 ||reviewBtnLoader}
           className="bg-black text-white w-full py-2 rounded-lg hover:bg-gray-900 transition cursor pointer disabled:opacity-50 disabled:cursor-not-allowed"> 
-          {reviewBtnLoader ? "Adding review..." : "Add review"}
+          {/*{reviewBtnLoader ? "Adding review..." : "Add review"}*/}
+          {updateReviewForm 
+            ? reviewBtnLoader
+              ? "Updating review..." 
+              : "Update Review"
+            : reviewBtnLoader
+            ? "Adding review..."
+            : "Add Review"}
         </Button>
       </form>
     </div>
