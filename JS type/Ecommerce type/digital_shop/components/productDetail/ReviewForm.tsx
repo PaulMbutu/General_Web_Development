@@ -5,13 +5,27 @@ import { Textarea } from "@/components/ui/textarea";
 import React, { useState } from "react";
 import Button from "../uiComponents/Button";
 import { cn } from "@/lib/utils";
+import { ProductDetail } from "@/lib/type";
+import { createReviewAction } from "@/lib/actions";
+import { toast } from "react-toastify";
 
 interface Props {
   rating: number;
   review: string;
 }
 
-const ReviewForm = () => {
+const ReviewForm = ({
+                        product,
+                        loggedInUserEmail
+                      }:{
+                        product:ProductDetail, 
+                        loggedInUserEmail: String | null | undefined
+                      }) => {
+
+  const {id, slug} = product
+  const [customerReview, setCustomerReview] = useState("")
+  const [reviewBtnLoader, setReviewButtonLoader] = useState(false)
+
   const [hoverRating, setHoverRating] = useState(0);
   const [hoverReview, setHoverReview] = useState("");
 
@@ -42,6 +56,33 @@ const ReviewForm = () => {
     { rating: 4, review: "Very Good" },
     { rating: 5, review: "Excellent" },
   ];
+
+  async function handleCreateReview(e: React.FormEvent){
+    e.preventDefault()
+    setReviewButtonLoader(true)
+    const formData = new FormData()
+    formData.set("product_id",String(id))
+    formData.set("slug",slug)
+    formData.set("review",customerReview)
+    formData.set("rating",String(clickedRating))
+    formData.set("email",String(loggedInUserEmail))
+
+    try{
+      await createReviewAction(formData)
+      toast.success("Review added successfully")
+    }
+    catch(err:unknown){
+        if(err instanceof Error){
+          toast.error(err.message)
+            throw new Error(err.message);
+        }
+        toast.error("An unknown error occured")
+        throw new Error("an unknown error occured");
+    }
+    finally{
+      setReviewButtonLoader(false)
+    }
+  }
 
   return (
     <div className="w-full mx-auto bg-white rounded-xl p-6">
@@ -84,17 +125,21 @@ const ReviewForm = () => {
 
       {/* Review Form */}
 
-      <form className="flex flex-col gap-4 mt-4">
+      <form className="flex flex-col gap-4 mt-4" onSubmit={handleCreateReview}>
         <Textarea
           name="content"
+          value={customerReview}
+          onChange={(e) => setCustomerReview(e.target.value)}
           className="border border-gray-300 focus:border-blue-500 focus:ring
                    focus:ring-blue-300 rounded-lg p-3 w-full resize-none"
           placeholder="Write your review..."
           required
         />
 
-        <Button className="bg-black text-white w-full py-2 rounded-lg hover:bg-gray-900 transition">
-          Add Review
+        <Button
+          disabled={clickedRating < 1 || (customerReview && customerReview.trim()).length==0 ||reviewBtnLoader}
+          className="bg-black text-white w-full py-2 rounded-lg hover:bg-gray-900 transition cursor pointer disabled:opacity-50 disabled:cursor-not-allowed"> 
+          {reviewBtnLoader ? "Adding review..." : "Add review"}
         </Button>
       </form>
     </div>

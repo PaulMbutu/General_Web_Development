@@ -1,12 +1,15 @@
-import { Review } from "@/lib/type";
+import { ProductDetail, Review } from "@/lib/type";
 import { cn, timeAgo } from "@/lib/utils";
 import { PenIcon, Star, TrashIcon } from "lucide-react";
 import { User } from "next-auth";
 import Image from "next/image";
 import React from "react";
+import Modal from "../uiComponents/Modal";
+import ReviewForm from "./ReviewForm";
 
-const ReviewCard = ({review,loggedInUser}: {review:Review, loggedInUser: User | undefined | null}) => {
+const ReviewCard = ({review,loggedInUser, product}: {review:Review, loggedInUser: User | undefined | null, product: ProductDetail}) => {
   const starArray = [1, 2, 3, 4, 5];
+  const loggedInUserEmail = loggedInUser?.email
 
   return (
     <div className="w-full bg-white shadow-lg px-6 py-6 rounded-lg flex flex-col gap-4 mb-6">
@@ -21,9 +24,14 @@ const ReviewCard = ({review,loggedInUser}: {review:Review, loggedInUser: User | 
               </button>
 
               {/* Pen button to edit review */}
+              <Modal updateReviewModal>
+                <ReviewForm product={product} loggedInUserEmail={loggedInUserEmail}/>
+              </Modal>
+              {/*
               <button className="bg-gray-200 p-2 rounded-md cursor-pointer transition-all hover:bg-gray-300">
                 <PenIcon className="size-5 text-gray-600" />
               </button>
+              */}
             </>
           </span>
         }

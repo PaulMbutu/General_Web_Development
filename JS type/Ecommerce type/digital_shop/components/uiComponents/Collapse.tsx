@@ -9,13 +9,14 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible"
-import { Review } from "@/lib/type"
+import { ProductDetail, Review } from "@/lib/type"
 import ReviewCard from "../productDetail/ReviewCard"
 import { User } from "next-auth"
 
-export function CollapsibleDemo({reviews, loggedInUser} : { 
+export function CollapsibleDemo({reviews, loggedInUser, product} : { 
                                                             reviews: Review[];
                                                             loggedInUser: User | undefined | null
+                                                            product: ProductDetail
                                                           }
                                   )
 {
@@ -36,10 +37,17 @@ export function CollapsibleDemo({reviews, loggedInUser} : {
           </Button>
         </CollapsibleTrigger>
       </div>
-      {!isOpen && <ReviewCard key={reviews[0].id} review={reviews[0]} loggedInUser={loggedInUser} />}
+      {!isOpen &&
+      (<ReviewCard
+        key={reviews[0].id} 
+        review={reviews[0]}
+        loggedInUser={loggedInUser} 
+        product={product}
+        />
+      )}
 
       <CollapsibleContent className="flex flex-col gap-2">
-        {reviews.map((review) => <ReviewCard key={review.id} review={review} loggedInUser={loggedInUser} />)}
+        {reviews.map((review) => <ReviewCard key={review.id} review={review} loggedInUser={loggedInUser} product={product}/>)}
       </CollapsibleContent>
     </Collapsible>
   )

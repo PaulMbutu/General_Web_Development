@@ -2,6 +2,7 @@
 
 import { signOut } from "@/auth"
 import { api } from "./api"
+import { revalidatePath } from "next/cache"
 
 export async function signOutUser() {
     await signOut({redirectTo: "/"})
@@ -21,7 +22,9 @@ export async function createReviewAction(formData: FormData){
     }
     const reviewObj = {product_id, email, rating, review}
     try {
-        const response = await api.post("add_review/",reviewObj)
+        const response = await api.post("add_review/",reviewObj) //Sends reviewObj to the back end database
+        revalidatePath(`products/${slug}`)
+        return response.data
     }
 
     catch(err:unknown){

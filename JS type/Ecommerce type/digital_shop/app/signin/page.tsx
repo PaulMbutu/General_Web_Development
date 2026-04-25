@@ -11,9 +11,10 @@ const SignInPage = () => {
       </h2>
   
       <form action={ async () => {
-        "use server"
-        await signIn("google", {redirectTo: "/"})
-      }}>
+                                    "use server"
+                                    await signIn("google", {redirectTo: "/"})
+                                  }}
+      >
         <button className="w-full flex items-center cursor-pointer justify-center border
                              border-gray-300 hover:border-gray-500 text-gray-700 font-medium py-3 
                              rounded-lg shadow-sm transition-all duration-300 bg-white hover:bg-gray-100">

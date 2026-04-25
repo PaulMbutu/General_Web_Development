@@ -28,9 +28,14 @@ const ProductPage = async ({params}:{params: Promise<{slug: string}>}) => {
   const exellent_rating = product.excellent_review
 
   const reviews = product.reviews
+
+  
   const similar_products = product.similar_products
   const session = await auth()
   const loggedInUser = session?.user
+  const loggedInUserEmail = loggedInUser?.email
+  const userHasReview = reviews.some((review) => review.user.email === loggedInUserEmail)
+
   console.log("Current product",product)
 
   return (
@@ -73,8 +78,8 @@ const ProductPage = async ({params}:{params: Promise<{slug: string}>}) => {
         <div className="flex justify-center items-center w-full mb-5">
 
         { loggedInUser ?
-          <Modal>
-            <ReviewForm />
+          <Modal userHasReview={userHasReview}>
+            <ReviewForm product={product} loggedInUserEmail={loggedInUserEmail}/>
           </Modal>
           : <Link href="/signin" className="default-btn max-sm:text-[12px] max-sm:px-4 my-6">
               Sign In to add a review
@@ -86,8 +91,12 @@ const ProductPage = async ({params}:{params: Promise<{slug: string}>}) => {
         {/* Review modal form ends */}
       </div>
 
-      {reviews.length > 0 && <ReviewCardContainer reviews={reviews} />}
-      <ProductSection title="Products from the same category" similar_products={similar_products} detailPage/>
+      {reviews.length > 0 && <ReviewCardContainer reviews={reviews} product={product}/>}
+      <ProductSection 
+        title="Products from the same category" 
+        similar_products={similar_products}
+        detailPage
+      />
     </>
   );
 };

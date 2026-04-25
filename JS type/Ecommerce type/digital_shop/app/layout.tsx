@@ -4,6 +4,7 @@ import "./globals.css";
 import NavBar from "@/components/navbar/NavBar";
 import  Footer from "@/components/footer/Footer";
 import NavBarContainer from "@/components/navbar/NavBarContainer";
+import { ToastContainer, toast } from "react-toastify";
 
 const ubuntu = Ubuntu({
   weight: ["400","500","700"], // Changed "600" to "700"
@@ -30,6 +31,7 @@ export default function RootLayout({
       >
         <main className="w-full">
           <NavBarContainer/>
+          <ToastContainer/>
           {children}
           <Footer/>
         </main>
