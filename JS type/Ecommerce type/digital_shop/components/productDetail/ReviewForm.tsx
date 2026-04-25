@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 import Button from "../uiComponents/Button";
 import { cn } from "@/lib/utils";
 import { ProductDetail, Review } from "@/lib/type";
-import { createReviewAction } from "@/lib/actions";
+import { createReviewAction, updateReviewAction } from "@/lib/actions";
 import { toast } from "react-toastify";
 
 interface Props {
@@ -72,6 +72,32 @@ const ReviewForm = ({
     setClickedReview(ratingTag ? ratingTag.review : "")
     
   },[rating, reviewMessage, updateReviewForm])
+
+  async function handleUpdateReview(e: React.FormEvent){
+    e.preventDefault()
+    setReviewButtonLoader(true)
+    const formData = new FormData()
+    formData.set("slug",slug)
+    formData.set("review",customerReview)
+    formData.set("rating",String(clickedRating))
+    formData.set("review_id",review? String(review.id) : "")
+
+    try{
+      await updateReviewAction(formData)
+      toast.success("Review updated successfully!")
+    }
+    catch(err:unknown){
+        if(err instanceof Error){
+          toast.error(err.message)
+            throw new Error(err.message);
+        }
+        toast.error("An unknown error occured")
+        throw new Error("an unknown error occured");
+    }
+    finally{
+      setReviewButtonLoader(false)
+    }
+  }
 
   async function handleCreateReview(e: React.FormEvent){
     e.preventDefault()
@@ -141,7 +167,7 @@ const ReviewForm = ({
 
       {/* Review Form */}
 
-      <form className="flex flex-col gap-4 mt-4" onSubmit={handleCreateReview}>
+      <form className="flex flex-col gap-4 mt-4" onSubmit={updateReviewForm ? handleUpdateReview : handleCreateReview}>
         <Textarea
           name="content"
           value={customerReview}

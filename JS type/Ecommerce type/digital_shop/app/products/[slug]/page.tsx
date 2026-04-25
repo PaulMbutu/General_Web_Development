@@ -36,7 +36,7 @@ const ProductPage = async ({params}:{params: Promise<{slug: string}>}) => {
   const loggedInUserEmail = loggedInUser?.email
   const userHasReview = reviews.some((review) => review.user.email === loggedInUserEmail)
 
-  console.log("Current product",product)
+  //console.log("Current product",product)
 
   return (
     <>
