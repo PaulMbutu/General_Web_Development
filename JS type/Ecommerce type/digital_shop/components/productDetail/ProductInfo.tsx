@@ -64,6 +64,7 @@ const ProductInfo = ({product, loggedInUserEmail}: {product: ProductDetail, logg
   }
 
   async function handleAddToWishlist(){
+    setAddWishListLoader(true)
     const formData = new FormData()
     formData.set("product_id", String(product.id))
     formData.set("email", loggedInUserEmail? loggedInUserEmail : "")
@@ -80,7 +81,31 @@ const ProductInfo = ({product, loggedInUserEmail}: {product: ProductDetail, logg
         }
         throw new Error("An unknown error occurred");
     }
+    finally{
+      setAddWishListLoader(false)
+    }
+
   }
+
+  useEffect(()=>{
+    async function handleProductInWishlist(){
+      if(loggedInUserEmail){
+        try{
+          const response = await api.get(`product_in_wishlist?email=${loggedInUserEmail}&product_id=${product.id}`)
+          setAddedToWishList(response.data.product_in_wishlist)
+          return response.data
+        }
+        catch(err:unknown){
+            console.error("Add to wishlist error:", err)
+            if(err instanceof Error){
+                throw new Error(err.message);
+            }
+            throw new Error("An unknown error occurred");
+        }
+      }
+    }
+    handleProductInWishlist()
+  },[loggedInUserEmail,product.id])
 
   return (
     <div className="bg-gray-50 padding-x py-10 flex items-start flex-wrap gap-12 main-max-width padding-x mx-auto">
@@ -126,8 +151,18 @@ const ProductInfo = ({product, loggedInUserEmail}: {product: ProductDetail, logg
             {
               loggedInUserEmail ?
               (
-                <Button handleClick={handleAddToWishlist} className="wish-btn">
-                  {addedToWishList ? "Remove from Wishlist" : "Add to Wishlist"}
+                <Button 
+                  disabled={addWishListLoader}
+                  handleClick={handleAddToWishlist}
+                  className="wish-btn disabled:opacity-50 disabled:cursor-not-alowed"
+                >
+                  {addedToWishList 
+                    ? addWishListLoader 
+                      ? "Updating..." 
+                      : "Remove from Wishlist" 
+                    : addWishListLoader
+                    ? "Updating..."
+                    : "Add to Wishlist"}
                 </Button>
               )
               : 

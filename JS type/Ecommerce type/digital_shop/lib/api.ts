@@ -101,3 +101,4 @@ export async function getProduct(slug: string){
         throw new Error("an unknown error occured");
     }
 }
+
