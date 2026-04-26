@@ -4,6 +4,7 @@ import { FaCartShopping } from "react-icons/fa6";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { signOutUser } from "@/lib/actions";
+import { useCart } from "@/context/CartContext";
 
 interface Props{
   mobile?: boolean;
@@ -15,6 +16,7 @@ interface Props{
 }
 
 const NavItems = ({mobile,loggedInUser}: Props) => {
+  const { cartItemsCount } = useCart()
   return (
     <div className={cn("flex items-center justify-center gap-6", mobile ? "flex-col" : "flex-row")}>
 
@@ -43,9 +45,10 @@ const NavItems = ({mobile,loggedInUser}: Props) => {
       <div className="relative flex items-center h-15 w-15 justify-center cursor-pointer">
         <FaCartShopping className="text-4xl" />
 
-        <span className="absolute top-0 right-0 px-2 py-1 bg-black rounded-full text-white">
-          3
+      {cartItemsCount ==0  || <span className="absolute top-0 right-0 px-2 py-1 bg-black rounded-full text-white">
+          {cartItemsCount}
         </span>
+        }
       </div>
     </div>
   );

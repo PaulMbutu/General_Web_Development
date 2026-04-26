@@ -73,3 +73,41 @@ export async function deleteReviewAction(formData:FormData){
         throw new Error("An unknown error occurred");
     }
 }
+
+export async function addToCartAction(formData:FormData){
+    const cart_code = formData.get("cart_code")
+    const product_id = formData.get("product_id")
+
+    const cartitemObj = {cart_code, product_id}
+
+    try{
+        const response = await api.post("add_to_cart/",cartitemObj)
+        return { success: true }
+    }
+    catch(err:unknown){
+        console.error("Add to cart error:", err)
+        if(err instanceof Error){
+            throw new Error(err.message);
+        }
+        throw new Error("An unknown error occurred");
+    }
+}
+
+export async function addToWishlistAction(formData:FormData) {
+
+    const email = formData.get("email")
+    const product_id = formData.get("product_id")
+    const wishlistObj = {email, product_id}
+
+    try{
+        const response = await api.post("add_to_wishlist/",wishlistObj)
+        return response.data
+    }
+    catch(err:unknown){
+        console.error("Add to wishlist error:", err)
+        if(err instanceof Error){
+            throw new Error(err.message);
+        }
+        throw new Error("An unknown error occurred");
+    }
+}

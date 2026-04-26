@@ -4,6 +4,7 @@ import ProductInfo from "@/components/productDetail/ProductInfo";
 import RatingProgressBar from "@/components/productDetail/RatingProgressBar";
 import ReviewCardContainer from "@/components/productDetail/ReviewCardContainer";
 import ReviewForm from "@/components/productDetail/ReviewForm";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import Modal from "@/components/uiComponents/Modal";
 import { getProduct } from "@/lib/api";
 import { ProductDetail } from "@/lib/type";
@@ -40,8 +41,10 @@ const ProductPage = async ({params}:{params: Promise<{slug: string}>}) => {
 
   return (
     <>
-      <ProductInfo product={product}/>
-
+      <TooltipProvider>
+        <ProductInfo product={product} loggedInUserEmail={loggedInUserEmail}/>
+      </TooltipProvider>
+      
       <div className="main-max-width padding-x mx-auto">
         <h3 className="font-semibold text-xl text-center my-6 text-gray-800">
           Customer Reviews
