@@ -111,3 +111,24 @@ export async function addToWishlistAction(formData:FormData) {
         throw new Error("An unknown error occurred");
     }
 }
+
+export async function updateCartitemAction(formData: FormData){
+    const item_id = Number(formData.get("cartitem_id"))
+    const quantity = Number(formData.get("quantity"))
+    const cart_code = formData.get("cart_code")
+
+    const cartitemObj = {item_id, quantity}
+
+    try{
+        const response = await api.put("update_cartitem_quantity/",cartitemObj)
+        revalidatePath(`/cart/${cart_code}`)
+        return response.data
+    }
+    catch(err:unknown){
+        console.error("Apdate cartitem error:", err)
+        if(err instanceof Error){
+            throw new Error(err.message);
+        }
+        throw new Error("An unknown error occurred");
+    }
+}

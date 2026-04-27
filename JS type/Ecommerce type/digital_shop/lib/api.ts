@@ -1,4 +1,6 @@
 import axios from "axios";
+import { redirect } from "next/navigation";
+
 
 export const BASE_URL ="http://127.0.0.1:8008"
 
@@ -109,6 +111,11 @@ export async function getCart(cart_code:string) {
     }
     catch(err:unknown)
     {
+        if(err instanceof Error){
+            if(err.message == "Request failed with status code 404"){
+                redirect("/cart")
+            }
+        }
         if(err instanceof Error){
             throw new Error(err.message)
         }
