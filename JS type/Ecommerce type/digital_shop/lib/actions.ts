@@ -132,3 +132,23 @@ export async function updateCartitemAction(formData: FormData){
         throw new Error("An unknown error occurred");
     }
 }
+
+export async function deleteCartitemAction(formData: FormData){
+    const item_id = Number(formData.get("cartitem_id"))
+    const cart_code = formData.get("cart_code")
+
+
+    try{
+        const response = await api.delete(`delete_cartitem/${item_id}/`)
+        revalidatePath(`/cart/${cart_code}`)
+        return response.data
+    }
+    catch(err:unknown){
+        console.error("delete cartitem error:", err)
+        if(err instanceof Error){
+            throw new Error(err.message);
+        }
+        throw new Error("An unknown error occurred");
+    }
+}
+

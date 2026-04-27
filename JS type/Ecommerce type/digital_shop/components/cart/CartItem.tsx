@@ -6,8 +6,9 @@ import Button from '../uiComponents/Button'
 import { CartitemType } from '@/lib/type'
 import { BASE_URL } from '@/lib/api'
 import { useCart } from '@/context/CartContext'
-import { updateCartitemAction } from '@/lib/actions'
+import { deleteCartitemAction, updateCartitemAction } from '@/lib/actions'
 import { toast } from 'react-toastify'
+import DeleteModal from '../uiComponents/DeleteModal'
 
 const CartItem = ({cartitem}:{cartitem: CartitemType}) => {
 
@@ -54,6 +55,24 @@ const CartItem = ({cartitem}:{cartitem: CartitemType}) => {
     }
   }
 
+  async function handleDeleteCartitem(){
+    const formData = new FormData()
+    formData.set("cartitem_id",String(cartitem.id))
+    formData.set("cart_code",cartCode?cartCode: "")
+
+    try{
+      const response = await deleteCartitemAction(formData)
+      setCartItemsCount(curr => curr - cartitem.quantity)
+      toast.success(`Cartitem - ${cartitem.product.name} deleted successfully`)
+    }
+    catch(err:unknown){
+        console.error("handle delete cartitem error:", err)
+        if(err instanceof Error){
+            throw new Error(err.message);
+        }
+        throw new Error("An unknown error occurred");
+    }
+  }
 
   return (
     <div className="flex items-center justify-between gap-6 border-b border-gray-200 py-4 mb-6 w-full flex-wrap bg-white px-4 rounded-lg shadow-sm">
@@ -105,11 +124,7 @@ const CartItem = ({cartitem}:{cartitem: CartitemType}) => {
         <p className="text-lg font-semibold text-gray-800">${formettedSubtotal}</p>
     
         {/* Remove Item Button */}
-        <button 
-          className="p-2 rounded-md bg-red-50 cursor-pointer hover:bg-red-100 transition text-red-500 border border-red-300"
-        >
-          <X className="w-5 h-5" />
-        </button>
+        <DeleteModal deleteCartitem handleDeleteCartitem={handleDeleteCartitem}/>
     
         {/* Update Cart Button */}
         <Button className='update-item-btn' disabled={cartitemUpdateLoader} handleClick={handleUpdateCartitem}>
