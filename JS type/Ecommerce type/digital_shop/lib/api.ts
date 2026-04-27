@@ -102,3 +102,16 @@ export async function getProduct(slug: string){
     }
 }
 
+export async function getCart(cart_code:string) {
+    try{
+        const response = await api.get(`get_cart/${cart_code}`)
+        return response.data
+    }
+    catch(err:unknown)
+    {
+        if(err instanceof Error){
+            throw new Error(err.message)
+        }
+        throw new Error("an unknown error occured");
+    }
+}

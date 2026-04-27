@@ -2,25 +2,33 @@ import React from 'react'
 import Image from "next/image"
 import { Minus, Plus, X } from 'lucide-react'
 import Button from '../uiComponents/Button'
+import { CartitemType } from '@/lib/type'
+import { BASE_URL } from '@/lib/api'
 
-const CartItem = () => {
+const CartItem = ({cartitem}:{cartitem: CartitemType}) => {
+
+  const sub_total = Number(cartitem.sub_total)
+  const formettedSubtotal = sub_total.toFixed(2)
+
   return (
     <div className="flex items-center justify-between gap-6 border-b border-gray-200 py-4 mb-6 w-full flex-wrap bg-white px-4 rounded-lg shadow-sm">
     
         {/* Product Image */}
         <div className="relative overflow-hidden w-17.5 h-17.5 rounded-lg border border-gray-200">
           <Image
-            src="/gaming_pad.jpg"
+            src={`${BASE_URL}${cartitem.product.image}`}
             alt="cartitem-img"
             className="object-cover"
             fill
+            priority
+            unoptimized={true}
           />
         </div>
     
         {/* Product Details - Name and Price */}
         <div className="flex-1 min-w-30">
-          <p className="font-semibold text-gray-800">Apple Smart Watch</p>
-          <p className="text-gray-600 text-sm mt-1">$200.00</p>
+          <p className="font-semibold text-gray-800">{cartitem.product.name}</p>
+          <p className="text-gray-600 text-sm mt-1">${cartitem.product.price}</p>
         </div>
     
         {/* Quantity Selector */}
@@ -34,7 +42,7 @@ const CartItem = () => {
     
           {/* Quantity Display */}
           <div className="w-12.5 h-10 flex items-center justify-center font-medium bg-white border border-gray-300 rounded-md shadow-sm">
-            3
+            {cartitem.quantity}
           </div>
     
           {/* Increase Quantity Button */}
@@ -46,7 +54,7 @@ const CartItem = () => {
         </div>
     
         {/* Subtotal Price */}
-        <p className="text-lg font-semibold text-gray-800">${100.00}</p>
+        <p className="text-lg font-semibold text-gray-800">${formettedSubtotal}</p>
     
         {/* Remove Item Button */}
         <button 
