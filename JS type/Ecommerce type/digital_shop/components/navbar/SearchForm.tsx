@@ -4,16 +4,18 @@ import { Search } from "lucide-react";
 
 const SearchForm = () => {
   return (
-    <Form action="/" scroll={false} className="search-form">
+    <Form action="/search" scroll={false} className="search-form">
         <input
             name="query"
             className="flex-1 font-bold w-full outline-none"
             placeholder="Search Products"
+            required
         />
 
-        <button className="size-7.5 rounded-full bg-black flex justify-center items-center cursor-pointer text-white">
+        <button type='submit' className="size-7.5 rounded-full bg-black flex justify-center items-center cursor-pointer text-white">
             <Search className="size-4" />
         </button>
+
     </Form>
   );
 };

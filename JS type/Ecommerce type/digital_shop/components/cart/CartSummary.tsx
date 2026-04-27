@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from '../uiComponents/Button'
 
-const CartSummary = ({total}:{total:number}) => {
+const CartSummary = ({total,loggedInUserEmail}:{total:number,loggedInUserEmail:string | null | undefined}) => {
 
   const tax = 5
   const sub_total = Number(total)
@@ -33,8 +33,8 @@ const CartSummary = ({total}:{total:number}) => {
 
   
 
-    <Button className='checkout-btn'>
-    Proceed to Checkout
+    <Button className='checkout-btn' disabled={!Boolean(loggedInUserEmail) || total < 5}>
+    {loggedInUserEmail ? "Proceed to Checkout": "Login to Proceed to checkout"}
     </Button>
 
   </div>
