@@ -2,10 +2,10 @@ import axios from "axios";
 import { redirect } from "next/navigation";
 
 
-export const BASE_URL ="http://127.0.0.1:8008"
+export const BASE_URL ="https://invigorating-communication-production.up.railway.app"
 
 export const api = axios.create({
-    baseURL:"http://127.0.0.1:8008"
+    baseURL:BASE_URL
 })
 
 export async function getExistingUser(email:string | null | undefined){
@@ -121,6 +121,23 @@ export async function getCart(cart_code:string) {
     }
 }
 
+export async function cartExistence(cart_code:string | null | undefined) {
+    try{
+        const response = await api.get(`check_cart_existence/${cart_code}`)
+        return response.data
+    }
+    catch(err:unknown)
+    {
+        if(err instanceof Error){
+            if(err.message == "Request failed with status code 404"){
+                redirect("/cart")
+            }
+            throw new Error(err.message)
+        }
+        throw new Error("an unknown error occured");
+    }
+}
+
 export async function productSearch(searchInput: string | null | undefined){
     if(searchInput){
         try{
@@ -136,4 +153,39 @@ export async function productSearch(searchInput: string | null | undefined){
         }
 
     }
+}
+
+export async function initiatePayment(paymentInfo: {email:string|null|undefined,cart_code:string|null})
+{
+    try{
+        const response = await api.post("create_checkout_session/",paymentInfo)
+        console.log("ssssss ",response.data)
+        return response.data
+    }
+    catch(err:unknown)
+    {
+    if(err instanceof Error){
+        throw new Error(err.message)
+    }
+    throw new Error("an unknown error occured");
+    }
+}
+
+export async function getOrders( email: string|null|undefined){
+
+    if(email){
+        try{
+            const response = await api.get(`get_orders?email=${email}`)
+            return response.data
+        }
+        catch(err:unknown)
+        {
+        if(err instanceof Error){
+            throw new Error(err.message)
+        }
+        throw new Error("an unknown error occured");
+        }
+    }
+
+
 }

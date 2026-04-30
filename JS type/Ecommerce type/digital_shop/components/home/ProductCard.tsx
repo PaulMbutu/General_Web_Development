@@ -24,7 +24,7 @@ const ProductCard = ({product}:{product:Product}) => {
         <p className="text-center text-lg font-semibold text-gray-800">{product.name}</p>
 
         {/* Product Price */}
-        <p className="text-[18px] text-center font-bold text-black">${product.price}</p>
+        <p className="text-[18px] text-center font-bold text-black">Ksh {product.price}</p>
 
       </div>
     </Link>

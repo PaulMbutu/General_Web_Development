@@ -13,6 +13,10 @@ const nextConfig: NextConfig = {
                                 hostname: '127.0.0.1',
                                 port: '8008',
                                 pathname: '/**' // Explicitly allow all paths like /img/product_img/
+                              },
+                              {
+                                protocol: 'https',
+                                hostname: 'https://invigorating-communication-production.up.railway.app',
                               }
                             ],
           }

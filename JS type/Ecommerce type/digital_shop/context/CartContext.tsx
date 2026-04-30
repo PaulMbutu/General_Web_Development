@@ -1,5 +1,5 @@
 "use client"
-import { api } from "@/lib/api";
+import { api, cartExistence } from "@/lib/api";
 import { generateRandomString } from "@/lib/utils";
 import { createContext, useContext, useEffect, useState } from "react";
 
@@ -28,8 +28,11 @@ export function CartProvider({children}:{children: React.ReactNode}){
     useEffect(()=>{
         async function getCartItemsCount(){
             try {
-                if(!cartCode){return}
+                //Check cart existence in the server before accessing it
+                const cart_existence = await cartExistence(cartCode)
+                if(!cartCode || cart_existence.cart_existence =="cart_does_not_exist"){return}
                 const response = await api.get(`get_cart_stat?cart_code=${cartCode}`);
+                console.log("cart items count: ",cartItemsCount)
                 setCartItemsCount(response.data.num_of_items)
                 return response.data;
             }

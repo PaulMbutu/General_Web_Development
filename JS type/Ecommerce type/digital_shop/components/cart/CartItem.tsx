@@ -92,7 +92,7 @@ const CartItem = ({cartitem}:{cartitem: CartitemType}) => {
         {/* Product Details - Name and Price */}
         <div className="flex-1 min-w-30">
           <p className="font-semibold text-gray-800">{cartitem.product.name}</p>
-          <p className="text-gray-600 text-sm mt-1">${cartitem.product.price}</p>
+          <p className="text-gray-600 text-sm mt-1">Ksh {cartitem.product.price}</p>
         </div>
     
         {/* Quantity Selector */}
@@ -121,7 +121,7 @@ const CartItem = ({cartitem}:{cartitem: CartitemType}) => {
         </div>
     
         {/* Subtotal Price */}
-        <p className="text-lg font-semibold text-gray-800">${formettedSubtotal}</p>
+        <p className="text-lg font-semibold text-gray-800">Ksh {formettedSubtotal}</p>
     
         {/* Remove Item Button */}
         <DeleteModal deleteCartitem handleDeleteCartitem={handleDeleteCartitem}/>

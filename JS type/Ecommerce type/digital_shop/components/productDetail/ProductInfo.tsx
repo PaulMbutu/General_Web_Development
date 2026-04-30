@@ -126,7 +126,7 @@ const ProductInfo = ({product, loggedInUserEmail}: {product: ProductDetail, logg
       <div className="flex flex-1 flex-col gap-6 max-w-125 max-md:w-full">
         <div className="flex flex-col gap-3">
           <h1 className="text-3xl font-bold">{product.name}</h1>
-          <h3 className="text-2xl font-semibold text-black">${product.price}</h3>
+          <h3 className="text-2xl font-semibold text-black">Ksh {product.price}</h3>
           
         </div>
 
