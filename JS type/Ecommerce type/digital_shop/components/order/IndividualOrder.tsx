@@ -5,6 +5,7 @@ import { ReceiptText } from 'lucide-react'
 import { timeAgo } from '@/lib/utils'
 
 const IndividualOrder = ({order}:{order:OrderType}) => {
+  const orderitems = order.items
   return (
     <div className="w-full border border-gray-200 bg-white rounded-xl shadow-md overflow-hidden">
       {/* Order Header */}
@@ -25,7 +26,7 @@ const IndividualOrder = ({order}:{order:OrderType}) => {
 
       {/* Order Items */}
       <div className="flex gap-4 px-6 py-6 bg-white overflow-x-auto">
-        <MiniProductCard />
+        {orderitems.map((orderitem) => <MiniProductCard key={orderitem.id} item={orderitem} />)}
       </div>
     </div>
   )

@@ -81,7 +81,12 @@ export interface OrderType{
     id: number;
     stripe_checkout_id: string
     amount: number
-    items:[]
+    items:OrderItemType[]
     status:string
     created_at: string
+}
+
+export interface WishlistType{
+    id: number;
+    product: Product;
 }

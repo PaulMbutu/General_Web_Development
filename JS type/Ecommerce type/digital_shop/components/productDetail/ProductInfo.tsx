@@ -171,7 +171,6 @@ const ProductInfo = ({product, loggedInUserEmail}: {product: ProductDetail, logg
               )
             }
         </div>
-        
       </div>
     </div>
   )

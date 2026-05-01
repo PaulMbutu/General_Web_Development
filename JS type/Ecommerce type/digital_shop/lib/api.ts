@@ -189,3 +189,22 @@ export async function getOrders( email: string|null|undefined){
 
 
 }
+
+export async function getWishlist( email: string|null|undefined){
+
+    if(email){
+        try{
+            const response = await api.get(`my_wishlists?email=${email}`)
+            return response.data
+        }
+        catch(err:unknown)
+        {
+        if(err instanceof Error){
+            throw new Error(err.message)
+        }
+        throw new Error("an unknown error occured");
+        }
+    }
+
+
+}

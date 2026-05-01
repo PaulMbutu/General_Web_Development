@@ -9,10 +9,10 @@ const OrderContainer = async() => {
   const session = await auth()
   const loggedInUserEmail = session?.user?.email
   const orders = await getOrders(loggedInUserEmail)
-  console.log("my_orders", orders)
+  /* console.log("my_orders", orders) */
 
 
-  if(!orders){
+  if(!orders || orders.length==0){
   return (
     <div className='w-full py-20 px-6 text-center bg-gray-50 rounded-lg'>
       <div className='flex flex-col items-center space-y-4'>

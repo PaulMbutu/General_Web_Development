@@ -16,7 +16,7 @@ const nextConfig: NextConfig = {
                               },
                               {
                                 protocol: 'https',
-                                hostname: 'https://invigorating-communication-production.up.railway.app',
+                                hostname: 'invigorating-communication-production.up.railway.app',
                               }
                             ],
           }
