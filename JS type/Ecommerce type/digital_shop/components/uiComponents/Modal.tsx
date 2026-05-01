@@ -8,14 +8,17 @@ import {
 } from "@/components/ui/dialog";
 import Button from "./Button";
 import { PenIcon } from "lucide-react";
+import { Addresstype } from "@/lib/type";
 
 interface Props {
   children: React.ReactNode;
   userHasReview?:boolean;
-  updateReviewModal?:boolean
+  updateReviewModal?:boolean;
+  addressForm?:boolean
+  address? : Addresstype | undefined
 }
 
-const Modal = ({ children, userHasReview, updateReviewModal }: Props) => {
+const Modal = ({ children, userHasReview, updateReviewModal, addressForm, address }: Props) => {
   if(userHasReview){
     return null
   }
@@ -29,13 +32,16 @@ const Modal = ({ children, userHasReview, updateReviewModal }: Props) => {
           </button>
           )
           :
+          addressForm ?
+          <Button className='address-btn'>{address?.city ? "Update Address": "Add Shipping Address"}</Button>
+          :
           (<Button className="default-btn max-sm:text-[12px] max-sm:px-4 my-6">
             Click to add a review
           </Button>)
         }
 
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="px-2 py-2">
         <DialogHeader>
           <DialogTitle className="hidden">Are you absolutely sure?</DialogTitle>
         </DialogHeader>

@@ -7,10 +7,10 @@ import { WishlistType } from '@/lib/type'
 
 const WishlistSection = async () => {
 
-    const session = await auth()
-    const loggedInUserEmail = session?.user?.email
-    const wishlists = await getWishlist(loggedInUserEmail)
-    console.log("my_wishlists", wishlists)
+  const session = await auth()
+  const loggedInUserEmail = session?.user?.email
+  const wishlists = await getWishlist(loggedInUserEmail)
+
   if(!wishlists || wishlists.length==0){
   return (
     <section className='main-max-width padding-x mx-auto my-16 text-center bg-white rounded-xl shadow-md'>

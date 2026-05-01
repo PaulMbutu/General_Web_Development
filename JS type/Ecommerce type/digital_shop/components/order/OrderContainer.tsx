@@ -4,13 +4,16 @@ import { PackageSearch } from 'lucide-react'
 import { getOrders } from '@/lib/api'
 import { auth } from '@/auth'
 import { OrderType } from '@/lib/type'
+import { redirect } from 'next/navigation'
 
 const OrderContainer = async() => {
   const session = await auth()
   const loggedInUserEmail = session?.user?.email
   const orders = await getOrders(loggedInUserEmail)
   /* console.log("my_orders", orders) */
-
+  if(!session){
+    redirect("/")
+  }
 
   if(!orders || orders.length==0){
   return (

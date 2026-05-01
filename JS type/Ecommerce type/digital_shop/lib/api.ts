@@ -208,3 +208,40 @@ export async function getWishlist( email: string|null|undefined){
 
 
 }
+
+export async function addAddress(addressData:{
+    email:string|null|undefined,
+    street:string,
+    city:string,
+    state:string,
+    phone:string
+}){
+    try{
+        const response = await api.post("add_address/",addressData)
+        return response.data
+    }
+    catch(err:unknown)
+    {
+        if(err instanceof Error){
+            throw new Error(err.message)
+        }
+        throw new Error("an unknown error occured");
+    }
+}
+
+export async function getAddress(email:string|null|undefined){
+    if(email){
+        try{
+            const response = await api.get(`get_address?email=${email}`)
+            return response.data
+        }
+        catch(err:unknown)
+        {
+            if(err instanceof Error){
+                throw new Error(err.message)
+            }
+            throw new Error("an unknown error occured");
+        }
+    }
+    return undefined
+}

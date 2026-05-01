@@ -90,3 +90,11 @@ export interface WishlistType{
     id: number;
     product: Product;
 }
+
+export interface Addresstype{
+    id: number;
+    street: string;
+    city: string;
+    state: string;
+    phone: string;
+}
