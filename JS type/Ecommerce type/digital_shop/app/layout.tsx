@@ -13,8 +13,8 @@ const ubuntu = Ubuntu({
 });
 
 export const metadata: Metadata = {
-  title: "Digital Shop",
-  description: "Shop anything online",
+  title: "DigitalShop",
+  description: "DigitalShop is a sleek and modern e-commerce website where you can browse, shop, and securely checkout with ease. Whether you're looking for the latest trends or everyday essentials, Shoppit makes online shopping seamless and enjoyable.",
 };
 
 export default function RootLayout({
