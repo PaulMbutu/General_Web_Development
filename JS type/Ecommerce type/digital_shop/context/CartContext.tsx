@@ -28,14 +28,19 @@ export function CartProvider({children}:{children: React.ReactNode}){
     useEffect(()=>{
         async function getCartItemsCount(){
             try {
-                //Check cart existence in the server before accessing it
-                const cart_existence = await cartExistence(cartCode)
-                if(!cartCode || cart_existence.cart_existence =="cart_does_not_exist"){return}
-                const response = await api.get(`get_cart_stat?cart_code=${cartCode}`);
-                console.log("cart items count: ",cartItemsCount)
-                setCartItemsCount(response.data.num_of_items)
-                return response.data;
-            }
+                    //Check cart existence in the server before accessing it
+                    if  (!cartCode)
+                        {
+                            return
+                        }
+                    const cart_existence = await cartExistence(cartCode)
+                    if  (cart_existence.exists)
+                        {
+                            const response = await api.get(`get_cart_stat?cart_code=${cartCode}`);
+                            setCartItemsCount(response.data.num_of_items)
+                            return response.data;
+                        }
+                }
             catch(err:unknown){
                 if(err instanceof Error){
                     throw new Error(err.message);

@@ -17,17 +17,34 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           const profile_picture_url = profile?.picture
 
           const userObj = {email, first_name, last_name, username, profile_picture_url}
-          console.log(profile)
 
           try {
-            await getExistingUser(email)
+            const response=await getExistingUser(email)
+            if(response.exists)
+              {
+                return true
+              }
+            else{
+              try{
+                  await createNewUser(userObj)
+                  return true
+              }
+              catch(err:unknown){
+                  console.log("creating user error: ",err)
+                  if(err instanceof Error){
+                      throw new Error(err.message);
+                  }
+                  throw new Error("an unknown error occured");
+              }
+            } 
           }
-          catch(err){
-            console.log(err)
-            await createNewUser(userObj)
+          catch(err:unknown){
+              console.log("checking existing user error: ",err)
+              if(err instanceof Error){
+                  throw new Error(err.message);
+              }
+              throw new Error("an unknown error occured");
           }
-          return true
-         
       }
       catch(err:unknown){
         return false

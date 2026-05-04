@@ -7,11 +7,19 @@ import ReviewForm from "@/components/productDetail/ReviewForm";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Modal from "@/components/uiComponents/Modal";
 import { getProduct } from "@/lib/api";
-import { ProductDetail } from "@/lib/type";
+import { Product, ProductDetail } from "@/lib/type";
 import { cn } from "@/lib/utils";
 import { Star } from "lucide-react";
 import Link from "next/link";
 import React from "react";
+
+export async function generateMetadata({params}:{params: Promise<{slug: string}>}){
+  const {slug} = await params
+  const product: Product = await getProduct(slug)
+  return {
+    title: `${product.name} | DigitalShop`
+  }
+}
 
 const ProductPage = async ({params}:{params: Promise<{slug: string}>}) => {
   

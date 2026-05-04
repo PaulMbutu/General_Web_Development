@@ -7,15 +7,9 @@ import {
         } from "@/components/ui/sheet";
 import { GiHamburgerMenu } from "react-icons/gi";
 import NavItems from "./NavItems";
+import { LoggedInUser } from "@/lib/type";
 
-interface Props{
-    loggedInUser:{
-    name: string;
-    email:string;
-    image:string;
-  }
-}
-const MobileNavbar = ({loggedInUser}:Props) => {
+const MobileNavbar = ({loggedInUser}: {loggedInUser? :LoggedInUser}) => {
   return (
     <Sheet>
       <SheetTrigger>

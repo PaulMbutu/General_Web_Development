@@ -22,6 +22,11 @@ export interface User{
     last_name:string;
     profile_picture_url: string | null
 }
+export interface LoggedInUser{
+    name: string;
+    email:string;
+    image:string;
+}
 
 export interface Review{
     id: number;

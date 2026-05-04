@@ -43,6 +43,7 @@ export async function createReviewAction(formData: FormData){
     const reviewObj = {product_id, email, rating, review}
     
     try {
+        console.log("review obj: ",reviewObj)
         await api.post("add_review/", reviewObj)
         revalidatePath(`/products/${slug}`)
         return { success: true } // Return minimal data

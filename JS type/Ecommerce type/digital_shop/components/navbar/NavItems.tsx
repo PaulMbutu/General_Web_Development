@@ -5,17 +5,10 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { signOutUser } from "@/lib/actions";
 import { useCart } from "@/context/CartContext";
+import { LoggedInUser } from "@/lib/type";
 
-interface Props{
-  mobile?: boolean;
-  loggedInUser:{
-                  name: string;
-                  email:string;
-                  image:string;
-                }
-}
 
-const NavItems = ({mobile,loggedInUser}: Props) => {
+const NavItems = ({mobile,loggedInUser}: {mobile?: boolean,loggedInUser? :LoggedInUser}) => {
   const { cartItemsCount,cartCode } = useCart()
   return (
     <div className={cn("flex items-center justify-center gap-6", mobile ? "flex-col" : "flex-row")}>
@@ -24,7 +17,13 @@ const NavItems = ({mobile,loggedInUser}: Props) => {
         <>
           <div className="w-12.5 h-12.5 rounded-full overflow-hidden shadow-md relative">
           {/* Profile picture container */}
-          <Image src={loggedInUser.image} alt="profile pic" className="object-cover" fill/>
+          <Image
+           src={loggedInUser.image}
+           alt="profile pic"
+           className="object-cover"
+           fill
+           sizes="50px"
+          />
           </div>
 
           <Link

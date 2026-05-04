@@ -110,7 +110,8 @@ const ReviewForm = ({
     formData.set("email",String(loggedInUserEmail))
 
     try{
-      await createReviewAction(formData)
+      const response=await createReviewAction(formData)
+      console.log("create review response: ",response)
       toast.success("Review added successfully")
     }
     catch(err:unknown){

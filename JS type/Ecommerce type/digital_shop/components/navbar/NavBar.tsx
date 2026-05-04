@@ -6,16 +6,9 @@ import SearchForm   from "./SearchForm";
 import NavItems     from "./NavItems";
 import MobileNavbar from "./MobileNavbar";
 import SearchButton from "./SearchButton";
+import { LoggedInUser } from "@/lib/type";
 
-interface User{
-  loggedInUser:{
-    name: string;
-    email:string;
-    image:string;
-  }
-}
-
-const NavBar = ({loggedInUser}: User) => {
+const NavBar = ({loggedInUser}: {loggedInUser? :LoggedInUser}) => {
   const [showSearchForm, setShowSearchForm] = useState(false);
 
   const handleSearch = () => {

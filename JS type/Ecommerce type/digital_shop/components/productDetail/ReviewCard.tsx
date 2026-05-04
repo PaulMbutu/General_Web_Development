@@ -13,12 +13,9 @@ import { toast } from "react-toastify";
 const ReviewCard = ({review,loggedInUser, product}: {review:Review, loggedInUser: User | undefined | null, product: ProductDetail}) => {
   const starArray = [1, 2, 3, 4, 5];
   const loggedInUserEmail = loggedInUser?.email
-  const [isDeleting, setIsDeleting] = useState(false)
 
   async function handleDeleteReview(){
-    if (isDeleting) return // Prevent multiple calls
-    
-    setIsDeleting(true)
+
     const formData = new FormData()
     formData.set("review_id", String(review.id))
     formData.set("slug", product.slug)
@@ -34,8 +31,6 @@ const ReviewCard = ({review,loggedInUser, product}: {review:Review, loggedInUser
         } else {
             toast.error("An unknown error occurred")
         }
-    } finally {
-      setIsDeleting(false)
     }
   }
 
@@ -47,7 +42,7 @@ const ReviewCard = ({review,loggedInUser, product}: {review:Review, loggedInUser
           <span className="flex gap-4">
             <>
               {/* Trash button to delete review */}
-              <DeleteModal handleDeleteReview={handleDeleteReview} isDeleting={isDeleting}/>
+              <DeleteModal handleDeleteReview={handleDeleteReview}/>
 
               {/* Pen button to edit review */}
               <Modal updateReviewModal>
@@ -74,13 +69,15 @@ const ReviewCard = ({review,loggedInUser, product}: {review:Review, loggedInUser
             alt="profile_pic"
             className="object-cover rounded-full"
             fill
+            priority={true}
+            unoptimized={true}
+            sizes="50px"
           />
         </div>
 
         {/* Review content including name, rating, and review text */}
         <div className="flex flex-col flex-1">
           <p className="font-semibold text-lg text-gray-800">{review.user.first_name} {review.user.last_name}</p>
-
           <div className="flex gap-1 mt-2">
             {starArray.map((star) => (
               <Star key={star} className={cn("size-5 cursor-pointer", star<=review.rating ? "fill-black" : "")} />

@@ -119,6 +119,7 @@ const ProductInfo = ({product, loggedInUserEmail}: {product: ProductDetail, logg
           priority 
           className="object-cover rounded-lg"
           unoptimized={true}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 350px"
         />
       </div>
 
