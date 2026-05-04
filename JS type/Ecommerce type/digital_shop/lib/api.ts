@@ -1,9 +1,11 @@
 import axios from "axios";
+import { Type } from "lucide-react";
 import { redirect } from "next/navigation";
 
 
-export const BASE_URL ="https://invigorating-communication-production.up.railway.app"
-//export const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL
+//export const BASE_URL ="https://invigorating-communication-production.up.railway.app"
+export const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL
+
 export const api = axios.create({
     baseURL:BASE_URL
 })

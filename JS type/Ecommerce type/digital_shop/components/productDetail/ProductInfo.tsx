@@ -114,13 +114,14 @@ const ProductInfo = ({product, loggedInUserEmail}: {product: ProductDetail, logg
       <div className="w-87.5 h-100 relative overflow-hidden rounded-lg shadow-sm border border-gray-200">
         <Image
           src={`${BASE_URL}${product.image}`}
-          alt="gaming"
+          alt={product.image}
           fill
           priority 
           className="object-cover rounded-lg"
           unoptimized={true}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 350px"
         />
+        
       </div>
 
       {/* Product Info */}

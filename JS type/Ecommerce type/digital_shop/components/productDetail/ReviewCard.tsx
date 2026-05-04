@@ -18,7 +18,7 @@ const ReviewCard = ({review,loggedInUser, product}: {review:Review, loggedInUser
 
     const formData = new FormData()
     formData.set("review_id", String(review.id))
-    formData.set("slug", product.slug)
+    formData.set("slug", product?.slug ? product.slug : "")
 
     try{
       await deleteReviewAction(formData)
@@ -65,8 +65,9 @@ const ReviewCard = ({review,loggedInUser, product}: {review:Review, loggedInUser
         {/* Profile picture */}
         <div className="w-12.5 h-12.5 rounded-full relative overflow-hidden border-2 border-gray-200">
           <Image
-            src={review.user.profile_picture_url ? `${review.user.profile_picture_url}` : "/profile_pic.jpg"}
-            alt="profile_pic"
+            src={review.user.profile_picture_url ? `${review.user.profile_picture_url}` :"/digital_shop_logo.png"}
+            //alt="profile_pic"
+            alt="/digital_shop_logo.png"
             className="object-cover rounded-full"
             fill
             priority={true}

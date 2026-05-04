@@ -19,7 +19,7 @@ const NavItems = ({mobile,loggedInUser}: {mobile?: boolean,loggedInUser? :Logged
           {/* Profile picture container */}
           <Image
            src={loggedInUser.image}
-           alt="profile pic"
+           alt="digital shop logo"
            className="object-cover"
            fill
            sizes="50px"
